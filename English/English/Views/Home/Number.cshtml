@@ -1,0 +1,66 @@
+﻿@model List<English.ViewModels.AnimalsViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Welcome to study English website</h1>
+
+    <div class="board">
+        @foreach (var a in Model)
+        {
+            <div class="square">
+
+                <img src="/images/question-mark.png" alt="@a.Id" data-name="@a.Name" data-vietnamese="@a.Vietnamese" data-mode="@a.Mode"
+                     onerror="this.style.display='none'"
+                     onclick="changeImage('@a.ImageUrl', $(this));" data-sound="@a.SoundUrl" data-pronounce="@a.PronounceUrl" image="@a.ImageUrl" />
+                <div class="text centered" hidden><a>@a.Name</a></div>
+
+
+            </div>
+        }
+
+    </div>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="//" />
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <audio controls id="sound" hidden>
+                        <source src="//" type="audio/mp3" />
+                        <source src="//" type="audio/ogg" />
+                        <source src="//" type="audio/mpeg" />
+                    </audio>
+                    <audio controls id="pronounce">
+                        <source src="//" type="audio/mp3" />
+                        <source src="//" type="audio/ogg" />
+                        <source src="//" type="audio/mpeg" />
+                    </audio>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="complete">
+        <h1>Congratulation!</h1>
+        <h3>You have completed the game</h3>
+    </div>
+
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">New game</a>
+
+</div>
