@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using English.Models;
+﻿using English.Models;
 using English.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace English.Controllers
 {
     public class HomeController : Controller
     {
         EnglishContext englishContext = new EnglishContext();
-        public IActionResult Index()
+        public ActionResult Index()
         {
             List<Animals> animals = new List<Animals>();
             // Get random 8 animals in database
@@ -21,8 +19,8 @@ namespace English.Controllers
                 .OrderBy(r => Guid.NewGuid()).Take(8).ToList();
 
             List<AnimalsViewModel> animalViewModels = new List<AnimalsViewModel>();
-            
-            foreach(var a in animals)
+
+            foreach (var a in animals)
             {
                 AnimalsViewModel imageViewModel = new AnimalsViewModel()
                 {
@@ -67,7 +65,7 @@ namespace English.Controllers
             return View(animalViewModels);
         }
 
-        public IActionResult Number()
+        public ActionResult Number()
         {
             List<Number> animals = new List<Number>();
             // Get random 8 animals in database
@@ -105,15 +103,18 @@ namespace English.Controllers
             return View(numbersViewModels);
         }
 
-        public IActionResult Privacy()
+        public ActionResult About()
         {
+            ViewBag.Message = "Your application description page.";
+
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public ActionResult Contact()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }
